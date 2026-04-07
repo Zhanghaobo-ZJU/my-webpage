@@ -406,7 +406,7 @@
         }
 
         .product-image {
-            height: 180px;
+            height: 220px;
             background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
             display: flex;
             align-items: center;
@@ -422,12 +422,17 @@
             background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 50%);
         }
 
-        .product-image svg {
-            width: 80px;
-            height: 80px;
-            color: rgba(34, 197, 94, 0.4);
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             position: relative;
             z-index: 1;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-badge {
@@ -793,10 +798,12 @@
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- 注释：可替换为真实图片，建议尺寸 400x220 -->
+                        <!-- UR16e from Universal Robots - 使用占位图演示结构 -->
+                        <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=400&h=220&fit=crop&auto=format" 
+                             alt="Universal Robots UR16e 协作机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/ur16e/400/220'">
                         <span class="product-badge">协作机器人</span>
                     </div>
                     <div class="product-content">
@@ -814,10 +821,11 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- IRB 6700 from ABB - 使用占位图演示结构 -->
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=220&fit=crop&auto=format" 
+                             alt="ABB IRB 6700 工业机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/abb6700/400/220'">
                         <span class="product-badge">工业旗舰</span>
                     </div>
                     <div class="product-content">
@@ -835,10 +843,11 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- LBR iiwa from KUKA - 使用占位图演示结构 -->
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=220&fit=crop&auto=format" 
+                             alt="KUKA LBR iiwa 协作机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/kukaiiwa/400/220'">
                         <span class="product-badge">协作旗舰</span>
                     </div>
                     <div class="product-content">
@@ -856,10 +865,11 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- FANUC M-20iD - 使用占位图演示结构 -->
+                        <img src="https://images.unsplash.com/photo-1561557944-6e7860d5a7f3?w=400&h=220&fit=crop&auto=format" 
+                             alt="FANUC M-20iD 弧焊机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/fanucm20/400/220'">
                         <span class="product-badge">高速精准</span>
                     </div>
                     <div class="product-content">
@@ -877,10 +887,11 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- AUBO-i5 - 国产协作机器人 -->
+                        <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=400&h=220&fit=crop&auto=format" 
+                             alt="遨博 AUBO-i5 协作机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/auboi5/400/220'">
                         <span class="product-badge">国产精品</span>
                     </div>
                     <div class="product-content">
@@ -898,10 +909,11 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="12" cy="5" r="3"/>
-                            <path d="M12 8v8m-4-4l4 4 4-4m-6 2h4"/>
-                        </svg>
+                        <!-- 新松 DSCR5 - 双臂机器人 -->
+                        <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=400&h=220&fit=crop&auto=format" 
+                             alt="新松 DSCR5 双臂协作机器人" 
+                             loading="lazy"
+                             onerror="this.src='https://picsum.photos/seed/xinsong/400/220'">
                         <span class="product-badge">复合机器人</span>
                     </div>
                     <div class="product-content">

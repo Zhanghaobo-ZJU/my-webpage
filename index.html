@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>机械臂世界 | 主流工业机械臂介绍</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #334155;
-            --color-on-primary: #FFFFFF;
-            --color-secondary: #475569;
-            --color-accent: #059669;
-            --color-accent-hover: #047857;
-            --color-background: #F8FAFC;
-            --color-foreground: #0F172A;
-            --color-muted: #F2F3F4;
-            --color-border: #E6E8EA;
-            --color-destructive: #DC2626;
-            --color-card: #FFFFFF;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            --color-background: #030712;
+            --color-foreground: #F9FAFB;
+            --color-text-primary: #F9FAFB;
+            --color-text-secondary: #9CA3AF;
+            --color-text-tertiary: #6B7280;
+            --color-card: rgba(255, 255, 255, 0.02);
+            --color-card-hover: rgba(255, 255, 255, 0.05);
+            --color-border: rgba(255, 255, 255, 0.1);
+            --color-accent: #22C55E;
+            --color-accent-hover: #16A34A;
         }
 
         * {
@@ -33,10 +28,15 @@
         }
 
         body {
-            font-family: 'Exo', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--color-background);
-            color: var(--color-foreground);
+            color: var(--color-text-primary);
             line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .container {
@@ -47,31 +47,39 @@
 
         /* Header */
         header {
-            background: var(--color-card);
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            height: 64px;
         }
 
         .logo {
-            font-family: 'Roboto Mono', monospace;
             font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--color-primary);
+            font-size: 1.25rem;
+            color: var(--color-text-primary);
+            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo svg {
+        .logo-icon {
             width: 32px;
             height: 32px;
             color: var(--color-accent);
@@ -79,25 +87,32 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 0.25rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--color-secondary);
+            color: var(--color-text-secondary);
             text-decoration: none;
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: color 0.2s;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--color-accent);
+            color: var(--color-text-primary);
+            background: var(--color-card);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1e293b 100%);
-            color: var(--color-on-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 6rem 0;
             position: relative;
             overflow: hidden;
@@ -106,34 +121,40 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
             text-align: center;
             max-width: 800px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(5, 150, 105, 0.2);
-            border: 1px solid var(--color-accent);
-            color: #6EE7B7;
-            padding: 0.5rem 1rem;
+            padding: 0.375rem 1rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 1.5rem;
+            border: 1px solid var(--color-accent);
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--color-accent);
         }
 
         .status-dot {
@@ -150,10 +171,11 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 700;
+            letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .hero h1 span {
@@ -162,11 +184,10 @@
 
         .hero p {
             font-size: 1.25rem;
-            color: #94A3B8;
-            margin-bottom: 2.5rem;
+            color: var(--color-text-secondary);
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
         }
 
         .hero-buttons {
@@ -181,7 +202,7 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.875rem 1.75rem;
-            border-radius: 8px;
+            border-radius: 0.75rem;
             font-weight: 600;
             font-size: 1rem;
             text-decoration: none;
@@ -192,34 +213,34 @@
 
         .btn-primary {
             background: var(--color-accent);
-            color: white;
+            color: #030712;
         }
 
         .btn-primary:hover {
             background: var(--color-accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid #475569;
+            background: var(--color-card);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
         }
 
         .btn-secondary:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.1);
+            background: var(--color-card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Stats */
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
             margin-top: 4rem;
             padding-top: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--color-border);
         }
 
         .stat-item {
@@ -227,21 +248,52 @@
         }
 
         .stat-value {
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--color-accent);
         }
 
         .stat-label {
-            color: #94A3B8;
+            color: var(--color-text-secondary);
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
 
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
+        /* Robot Illustration */
+        .robot-illustration {
+            margin-top: 4rem;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 2/1;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+            border-radius: 1.5rem;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robot-illustration::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322C55E' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .robot-svg {
+            width: 200px;
+            height: 200px;
+            color: rgba(34, 197, 94, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section */
+        section {
+            padding: 6rem 0;
         }
 
         .section-header {
@@ -251,54 +303,58 @@
 
         .section-tag {
             display: inline-block;
-            background: rgba(5, 150, 105, 0.1);
+            background: rgba(34, 197, 94, 0.1);
             color: var(--color-accent);
             padding: 0.375rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .section-header h2 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-foreground);
+            color: var(--color-text-primary);
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .section-header p {
-            color: var(--color-secondary);
+            color: var(--color-text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
         .feature-card {
             background: var(--color-card);
             border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 1.75rem;
+            border-radius: 1rem;
+            padding: 1.5rem;
             transition: all 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-accent);
+            border-color: rgba(34, 197, 94, 0.4);
+            background: var(--color-card-hover);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: rgba(5, 150, 105, 0.1);
-            border-radius: 10px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -315,43 +371,43 @@
             font-size: 1.125rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: var(--color-foreground);
+            color: var(--color-text-primary);
         }
 
         .feature-card p {
-            color: var(--color-secondary);
+            color: var(--color-text-secondary);
             font-size: 0.9375rem;
             line-height: 1.6;
         }
 
         /* Products Section */
         .products {
-            background: var(--color-muted);
-            padding: 5rem 0;
+            background: rgba(255, 255, 255, 0.01);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .product-card {
             background: var(--color-card);
-            border-radius: 16px;
-            overflow: hidden;
             border: 1px solid var(--color-border);
+            border-radius: 1.25rem;
+            overflow: hidden;
             transition: all 0.3s;
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            border-color: rgba(34, 197, 94, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .product-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1e293b 100%);
+            height: 180px;
+            background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -359,10 +415,19 @@
             overflow: hidden;
         }
 
+        .product-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 50%);
+        }
+
         .product-image svg {
             width: 80px;
             height: 80px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(34, 197, 94, 0.4);
+            position: relative;
+            z-index: 1;
         }
 
         .product-badge {
@@ -370,11 +435,12 @@
             top: 1rem;
             right: 1rem;
             background: var(--color-accent);
-            color: white;
+            color: #030712;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
+            z-index: 2;
         }
 
         .product-content {
@@ -382,7 +448,7 @@
         }
 
         .product-brand {
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
             color: var(--color-accent);
             font-weight: 600;
@@ -395,11 +461,11 @@
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
-            color: var(--color-foreground);
+            color: var(--color-text-primary);
         }
 
         .product-card p {
-            color: var(--color-secondary);
+            color: var(--color-text-secondary);
             font-size: 0.9375rem;
             margin-bottom: 1rem;
             line-height: 1.6;
@@ -412,63 +478,68 @@
         }
 
         .spec-tag {
-            background: var(--color-muted);
+            background: rgba(255, 255, 255, 0.05);
             padding: 0.25rem 0.625rem;
-            border-radius: 4px;
+            border-radius: 0.25rem;
             font-size: 0.75rem;
-            color: var(--color-secondary);
-            font-family: 'Roboto Mono', monospace;
+            color: var(--color-text-secondary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Brands Section */
-        .brands {
-            padding: 5rem 0;
-        }
-
+        /* Brands Grid */
         .brands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
             align-items: center;
-            justify-items: center;
         }
 
         .brand-item {
-            padding: 1.5rem 2rem;
+            padding: 1.25rem 1.5rem;
             background: var(--color-card);
             border: 1px solid var(--color-border);
-            border-radius: 12px;
+            border-radius: 0.75rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            gap: 0.25rem;
             transition: all 0.2s;
             cursor: pointer;
         }
 
         .brand-item:hover {
-            border-color: var(--color-accent);
+            border-color: rgba(34, 197, 94, 0.4);
+            background: var(--color-card-hover);
             transform: scale(1.05);
         }
 
         .brand-name {
             font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--color-primary);
-            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            color: var(--color-text-primary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .brand-item .country {
-            font-size: 0.75rem;
-            color: var(--color-secondary);
-            margin-left: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--color-text-tertiary);
         }
 
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1e293b 100%);
-            padding: 5rem 0;
+            background: linear-gradient(180deg, var(--color-background) 0%, #111827 100%);
             text-align: center;
-            color: white;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border), transparent);
         }
 
         .cta h2 {
@@ -478,7 +549,7 @@
         }
 
         .cta p {
-            color: #94A3B8;
+            color: var(--color-text-secondary);
             font-size: 1.125rem;
             max-width: 600px;
             margin: 0 auto 2rem;
@@ -486,9 +557,9 @@
 
         /* Footer */
         footer {
-            background: var(--color-foreground);
-            color: #94A3B8;
+            border-top: 1px solid var(--color-border);
             padding: 3rem 0;
+            background: var(--color-background);
         }
 
         .footer-content {
@@ -500,10 +571,10 @@
         }
 
         .footer-logo {
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
             font-size: 1.25rem;
-            color: white;
+            color: var(--color-text-primary);
         }
 
         .footer-links {
@@ -513,18 +584,20 @@
         }
 
         .footer-links a {
-            color: #94A3B8;
+            color: var(--color-text-tertiary);
             text-decoration: none;
+            font-size: 0.875rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--color-text-primary);
         }
 
         .copyright {
             font-size: 0.875rem;
-            font-family: 'Roboto Mono', monospace;
+            color: var(--color-text-tertiary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Responsive */
@@ -538,7 +611,7 @@
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .stats {
@@ -546,11 +619,15 @@
             }
 
             .section-header h2 {
-                font-size: 1.75rem;
+                font-size: 2rem;
             }
 
             .products-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .footer-content {
@@ -568,11 +645,11 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="container">
             <nav>
                 <div class="logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
                     </svg>
                     ROBOTICS
@@ -593,7 +670,7 @@
                     <span class="status-dot"></span>
                     技术实时更新
                 </div>
-                <h1>探索<span>工业机械臂</span>的前沿科技</h1>
+                <h1>探索<span>工业机械臂</span><br>的前沿科技</h1>
                 <p>从ABB到国产之光，全面解析全球主流工业机械臂的技术特点、应用场景与选型指南</p>
                 <div class="hero-buttons">
                     <a href="#products" class="btn btn-primary">
@@ -622,6 +699,17 @@
                         <div class="stat-label">电子行业</div>
                     </div>
                 </div>
+                <div class="robot-illustration">
+                    <svg class="robot-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="50" cy="20" r="8"/>
+                        <path d="M50 28v20M50 48l-20 25M50 48l20 25M30 73v10M70 73v10"/>
+                        <circle cx="50" cy="20" r="4" fill="currentColor" opacity="0.3"/>
+                        <path d="M50 28v10" stroke-width="3"/>
+                        <path d="M40 38l-15 20M60 38l15 20"/>
+                        <path d="M25 58l-8 15M75 58l8 15"/>
+                        <circle cx="50" cy="48" r="5" stroke-dasharray="2 2"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
@@ -629,7 +717,7 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">CORE CAPABILITIES</span>
+                <span class="section-tag">Core Capabilities</span>
                 <h2>机械臂核心能力</h2>
                 <p>现代工业机械臂的关键技术指标，决定了其在不同场景下的适用性</p>
             </div>
@@ -665,7 +753,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
                             <path d="M3 9h18M9 21V9"/>
                         </svg>
                     </div>
@@ -698,7 +786,7 @@
     <section class="products" id="products">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">PRODUCT SHOWCASE</span>
+                <span class="section-tag">Product Showcase</span>
                 <h2>主流机械臂产品</h2>
                 <p>精选全球知名品牌代表性产品，覆盖从协作机器人到重型工业机器人</p>
             </div>
@@ -835,52 +923,66 @@
     <section class="brands" id="brands">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">BRAND ECOSYSTEM</span>
+                <span class="section-tag">Brand Ecosystem</span>
                 <h2>全球品牌生态</h2>
                 <p>汇聚工业机器人领域领先品牌，各有所长</p>
             </div>
             <div class="brands-grid">
                 <div class="brand-item">
-                    <span class="brand-name">ABB<span class="country">瑞士</span></span>
+                    <span class="brand-name">ABB</span>
+                    <span class="country">瑞士</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">KUKA<span class="country">德国</span></span>
+                    <span class="brand-name">KUKA</span>
+                    <span class="country">德国</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">FANUC<span class="country">日本</span></span>
+                    <span class="brand-name">FANUC</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">YASKAWA<span class="country">日本</span></span>
+                    <span class="brand-name">YASKAWA</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">KAWASAKI<span class="country">日本</span></span>
+                    <span class="brand-name">KAWASAKI</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">EPSON<span class="country">日本</span></span>
+                    <span class="brand-name">EPSON</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">NACHI<span class="country">日本</span></span>
+                    <span class="brand-name">NACHI</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">STÄUBLI<span class="country">瑞士</span></span>
+                    <span class="brand-name">STÄUBLI</span>
+                    <span class="country">瑞士</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">COMAU<span class="country">意大利</span></span>
+                    <span class="brand-name">COMAU</span>
+                    <span class="country">意大利</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">DENSO<span class="country">日本</span></span>
+                    <span class="brand-name">DENSO</span>
+                    <span class="country">日本</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">遨博<span class="country">中国</span></span>
+                    <span class="brand-name">遨博</span>
+                    <span class="country">中国</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">节卡<span class="country">中国</span></span>
+                    <span class="brand-name">节卡</span>
+                    <span class="country">中国</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">新松<span class="country">中国</span></span>
+                    <span class="brand-name">新松</span>
+                    <span class="country">中国</span>
                 </div>
                 <div class="brand-item">
-                    <span class="brand-name">埃斯顿<span class="country">中国</span></span>
+                    <span class="brand-name">埃斯顿</span>
+                    <span class="country">中国</span>
                 </div>
             </div>
         </div>
@@ -915,5 +1017,16 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
